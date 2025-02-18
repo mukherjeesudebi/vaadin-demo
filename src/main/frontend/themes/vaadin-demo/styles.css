@@ -1,0 +1,83 @@
+@import url('./main-layout.css');
+@import url('./views/users-view.css');
+@import url('./views/products-view.css');
+
+* {
+	box-sizing: border-box;
+}
+
+.header-items {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+vaadin-app-layout::part(navbar) {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	background-color: #ffffff;
+	background-image: none;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 0 var(--lumo-space-m);
+}
+
+.user-profile-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: white; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	margin: 0 var(--lumo-space-m);
+	border: 1px solid black;
+}
+
+.user-profile-icon vaadin-icon {
+    color: #8f3e3e; 
+	width: 30px;
+	height: 30px;
+}
+
+.user-profile-name {
+	font-weight: bold;
+	font-size: 13px;
+	color: #10105ae3;
+}
+
+.user-profile-role {
+	font-size: 13px;
+	color: grey;
+	font-weight: lighter;
+}
+
+.user-profile-name-role {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+vaadin-menu-bar-overlay {
+	justify-content: flex-start !important;
+	align-items: flex-end !important;
+}
+
+vaadin-menu-bar-button[theme~="tertiary"]:hover{
+	background	: #ffffff !important;
+}
+
+/*.users-grid-layout{
+	margin: 30px;
+	border: 1px solid #80808063;	
+	overflow: hidden;
+	border-radius: 10px;
+
+}
+*/

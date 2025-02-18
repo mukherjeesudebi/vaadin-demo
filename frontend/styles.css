@@ -1,0 +1,27 @@
+#test-view {
+    background-color: blue;
+    z-index: 1;
+    opacity: 25%;
+    position: relative;
+}
+
+#headerToggle,
+#sideToggle,
+#elementToggle{
+    background-color: red;
+    z-index: 2000;
+    position: fixed;
+    top: 200px;
+}
+
+#headerToggle {
+    left: 300px;
+}
+
+#sideToggle {
+    left: 400px;
+}
+
+#elementToggle {
+    left: 500px;
+}
