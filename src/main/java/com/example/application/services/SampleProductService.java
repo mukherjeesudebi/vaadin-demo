@@ -1,28 +1,29 @@
 package com.example.application.services;
 
-import com.example.application.data.SamplePerson;
-import com.example.application.data.SamplePersonRepository;
 import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import com.example.application.data.SampleProduct;
+import com.example.application.data.SampleProductRepository;
 
 @Service
-public class SamplePersonService {
+public class SampleProductService {
 
-    private final SamplePersonRepository repository;
+    private final SampleProductRepository repository;
 
-    public SamplePersonService(SamplePersonRepository repository) {
+    public SampleProductService(SampleProductRepository repository) {
         this.repository = repository;
     }
 
-    public Optional<SamplePerson> get(Long id) {
+    public Optional<SampleProduct> get(Long id) {
         return repository.findById(id);
     }
 
-    public SamplePerson save(SamplePerson entity) {
+    public SampleProduct save(SampleProduct entity) {
         return repository.save(entity);
     }
 
@@ -30,16 +31,18 @@ public class SamplePersonService {
         repository.deleteById(id);
     }
 
-    public Page<SamplePerson> list(Pageable pageable) {
+    public Page<SampleProduct> list(Pageable pageable) {
         return repository.findAll(pageable);
     }
 
-    public Page<SamplePerson> list(Pageable pageable, Specification<SamplePerson> filter) {
+    public Page<SampleProduct> list(Pageable pageable, Specification<SampleProduct> filter) {
         return repository.findAll(filter, pageable);
     }
 
     public int count() {
         return (int) repository.count();
     }
+
+
 
 }

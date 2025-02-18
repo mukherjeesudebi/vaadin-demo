@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import com.example.application.data.SamplePerson;
 import com.example.application.data.SamplePersonRepository;
+import com.example.application.data.SampleProduct;
+import com.example.application.data.SampleProductRepository;
 import com.github.javafaker.Faker;
 
 @Component
@@ -18,9 +20,12 @@ public class DBTools {
 	private static final Logger log = LoggerFactory.getLogger(DBTools.class);
 
 	final SamplePersonRepository samplePersonRepository;
+	final SampleProductRepository sampleProductRepository;
 
-	public DBTools(@Autowired SamplePersonRepository samplePersonRepository) {
+	public DBTools(@Autowired SamplePersonRepository samplePersonRepository, @Autowired SampleProductRepository sampleProductRepository) {
 		this.samplePersonRepository = samplePersonRepository;
+		this.sampleProductRepository = sampleProductRepository;
+		
 	}
 
 	public void clear() {
@@ -44,12 +49,25 @@ public class DBTools {
 		samplePerson.setImg(list[r.nextInt(list.length)]);
 		return samplePersonRepository.save(samplePerson);
 	}
+	
+	public SampleProduct createSampleProduct() {
+		SampleProduct sampleProduct = new SampleProduct();
+		Faker faker = new Faker();
+		sampleProduct.setName(faker.commerce().productName());
+		sampleProduct.setCategory(faker.commerce().department());
+		return sampleProductRepository.save(sampleProduct);
+	}
 
 	public void create() {
 		log.info("======== CREATING DATABASE ======== ");
-		for (int i = 1; i <= 100; i++) {
+		for (int i = 1; i <= 10; i++) {
 			log.info("======== creating Person ======== ");
 			createSamplePerson();
+		}
+		
+		for (int i = 1; i <= 10; i++) {
+			log.info("======== creating Person ======== ");
+			createSampleProduct();
 		}
 
 		log.info("Done.");

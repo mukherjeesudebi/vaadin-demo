@@ -73,7 +73,7 @@ public class MainLayout extends AppLayout {
         Div userProfileRole = new Div("Admin");
         userProfileRole.addClassName("user-profile-role");
         Div userProfileNameRole = new Div(userProfileName,userProfileRole);
-        userProfileNameRole.addClassName("user-profile-role");
+        userProfileNameRole.addClassName("user-profile-name-role");
         
 		userProfile.add(userProfileIcon, userProfileNameRole);
 		
