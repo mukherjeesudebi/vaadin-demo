@@ -15,6 +15,7 @@ import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.NativeLabel;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
@@ -43,7 +44,7 @@ public class UsersView extends ViewLayout {
 	private final SamplePersonService samplePersonService;
 	private Dialog dialog;
 	private SamplePerson selectedPerson;
-	private Binder<SamplePerson> binder; 
+	private Binder<SamplePerson> binder;
 
 	public UsersView(SamplePersonService SamplePersonService) {
 		this.samplePersonService = SamplePersonService;
@@ -73,6 +74,13 @@ public class UsersView extends ViewLayout {
 		grid.addColumn(new ComponentRenderer<>(person -> {
 			Div options = new Div();
 			Button detailsButton = new Button("Details");
+			detailsButton.addClickListener(event -> {
+				if (!grid.isDetailsVisible(person)) {
+					grid.setDetailsVisible(person, true);
+				} else {
+					grid.setDetailsVisible(person, false);
+				}
+			});
 			detailsButton.addClassNames(Margin.Right.MEDIUM);
 			Button editButton = new Button("Edit", new Icon(VaadinIcon.EDIT));
 			editButton.addClickListener(event -> {
@@ -85,7 +93,13 @@ public class UsersView extends ViewLayout {
 		})).setHeader("Options").setAutoWidth(true);
 
 		grid.setItems(query -> samplePersonService.list(VaadinSpringDataHelpers.toSpringPageRequest(query)).stream());
-
+		grid.setItemDetailsRenderer(new ComponentRenderer<>(person -> {
+			VerticalLayout detailsLayout = new VerticalLayout();
+			detailsLayout.add(new NativeLabel("First Name: " + person.getFirstName()));
+			detailsLayout.add(new NativeLabel("Last Name: " + person.getLastName()));
+			return detailsLayout;
+		}));
+		grid.setDetailsVisibleOnClick(false);
 		return grid;
 	}
 
@@ -94,7 +108,7 @@ public class UsersView extends ViewLayout {
 
 		TextField firstNameField = new TextField("First Name");
 		TextField lastNameField = new TextField("Last Name");
-		
+
 		binder.forField(firstNameField).asRequired().bind(SamplePerson::getFirstName, SamplePerson::setFirstName);
 		binder.forField(lastNameField).asRequired().bind(SamplePerson::getLastName, SamplePerson::setLastName);
 
@@ -108,7 +122,7 @@ public class UsersView extends ViewLayout {
 		Button saveButton = new Button("Save", saveEvent -> {
 			try {
 				binder.writeBean(selectedPerson);
-				var updatedPerson=samplePersonService.save(selectedPerson);
+				var updatedPerson = samplePersonService.save(selectedPerson);
 				dialog.close();
 				grid.getDataProvider().refreshItem(updatedPerson);
 			} catch (ValidationException e) {
