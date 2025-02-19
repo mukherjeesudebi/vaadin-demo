@@ -145,7 +145,9 @@ public class UsersView extends ViewLayout {
 	}
 
 	public Button addButton() {
-		return new Button("Add User", new Icon(VaadinIcon.PLUS));
+		Button button = new Button("Add User", new Icon(VaadinIcon.PLUS));
+		button.addThemeName("add-items-button");
+		return button;
 	}
 
 }

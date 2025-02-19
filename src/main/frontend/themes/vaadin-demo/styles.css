@@ -73,11 +73,23 @@ vaadin-menu-bar-button[theme~="tertiary"]:hover{
 	background	: #ffffff !important;
 }
 
-/*.users-grid-layout{
-	margin: 30px;
-	border: 1px solid #80808063;	
-	overflow: hidden;
-	border-radius: 10px;
-
+vaadin-app-layout::part(drawer) {
+	background-color: #f0f8ff;
+	padding-block: 10px;
 }
-*/
+
+vaadin-side-nav-item::part(content) {
+	margin-inline: 10px;
+}
+
+vaadin-side-nav-item[current]::part(content) {
+	background-color: #ffffff;
+	border-radius: 10px;
+	color: #2a2a6c;
+	margin-inline: 10px;
+}
+
+vaadin-button[theme~="add-items-button"]{
+	background-color: #2a2a6c;
+	color: #ffffff;
+}

@@ -133,7 +133,9 @@ public class ProductsView extends ViewLayout {
 	}
 
 	public Button addButton() {
-		return new Button("Add Product", new Icon(VaadinIcon.PLUS));
+		Button button = new Button("Add Product", new Icon(VaadinIcon.PLUS));
+		button.addThemeName("add-items-button");
+		return button;
 	}
 
 }
