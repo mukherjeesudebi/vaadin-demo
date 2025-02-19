@@ -21,8 +21,8 @@ import jakarta.annotation.PostConstruct;
  */
 @SpringBootApplication
 @Theme(value = "vaadin-demo")
-@EntityScan("com.example.application.data")
-@EnableJpaRepositories(basePackages = "com.example.application.data")
+@EntityScan("com.example.application.data.entity")
+@EnableJpaRepositories(basePackages = "com.example.application.repository")
 @EnableTransactionManagement
 public class Application implements AppShellConfigurator {
 

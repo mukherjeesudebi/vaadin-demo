@@ -5,8 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.lineawesome.LineAwesomeIconUrl;
 
-import com.example.application.data.SampleProduct;
-import com.example.application.data.SampleProductDataProvider;
+import com.example.application.data.dto.SampleProductDTO;
 import com.example.application.services.SampleProductService;
 import com.example.application.views.ViewLayout;
 import com.vaadin.flow.component.Component;
@@ -39,23 +38,22 @@ import com.vaadin.flow.theme.lumo.LumoUtility.Margin;
 public class ProductsView extends ViewLayout {
 
 	private static final Logger log = LoggerFactory.getLogger(ProductsView.class);
-	private Grid<SampleProduct> grid;
+	private Grid<SampleProductDTO> grid;
 	private final SampleProductService sampleProductService;
 	private Dialog dialog;
-	private SampleProduct selectedProduct;
-	private Binder<SampleProduct> binder;
+	private SampleProductDTO selectedProduct;
+	private Binder<SampleProductDTO> binder;
 
-	public ProductsView(@Autowired SampleProductService sampleProductService,
-			@Autowired SampleProductDataProvider dataProvider) {
+	public ProductsView(@Autowired SampleProductService sampleProductService) {
 		this.sampleProductService = sampleProductService;
 		dialog = new Dialog();
-		binder = new Binder<>(SampleProduct.class);
+		binder = new Binder<>(SampleProductDTO.class);
 		createDialogLayout();
 		setSizeFull();
 	}
 
 	public Component renderComponent() {
-		grid = new Grid<>(SampleProduct.class, false);
+		grid = new Grid<>(SampleProductDTO.class, false);
 		grid.setHeightFull();
 		grid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
 		grid.setAllRowsVisible(false);
@@ -99,8 +97,8 @@ public class ProductsView extends ViewLayout {
 		TextField name = new TextField("Name");
 		TextField category = new TextField("Category");
 
-		binder.forField(name).asRequired().bind(SampleProduct::getName, SampleProduct::setName);
-		binder.forField(category).asRequired().bind(SampleProduct::getCategory, SampleProduct::setCategory);
+		binder.forField(name).asRequired().bind(SampleProductDTO::getName, SampleProductDTO::setName);
+		binder.forField(category).asRequired().bind(SampleProductDTO::getCategory, SampleProductDTO::setCategory);
 
 		VerticalLayout dialogLayout = new VerticalLayout(name, category);
 		dialogLayout.setPadding(false);

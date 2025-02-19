@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.vaadin.lineawesome.LineAwesomeIconUrl;
 
-import com.example.application.data.SamplePerson;
+import com.example.application.data.dto.SamplePersonDTO;
 import com.example.application.services.SamplePersonService;
 import com.example.application.views.ViewLayout;
 import com.vaadin.flow.component.Component;
@@ -13,8 +13,8 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.Uses;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.grid.Grid.SelectionMode;
+import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.NativeLabel;
 import com.vaadin.flow.component.icon.Icon;
@@ -41,22 +41,22 @@ import com.vaadin.flow.theme.lumo.LumoUtility.Padding;
 public class UsersView extends ViewLayout {
 
 	private static final Logger log = LoggerFactory.getLogger(UsersView.class);
-	private Grid<SamplePerson> grid;
+	private Grid<SamplePersonDTO> grid;
 	private final SamplePersonService samplePersonService;
 	private Dialog dialog;
-	private SamplePerson selectedPerson;
-	private Binder<SamplePerson> binder;
+	private SamplePersonDTO selectedPerson;
+	private Binder<SamplePersonDTO> binder;
 
 	public UsersView(SamplePersonService SamplePersonService) {
 		this.samplePersonService = SamplePersonService;
 		dialog = new Dialog();
-		binder = new Binder<>(SamplePerson.class);
+		binder = new Binder<>(SamplePersonDTO.class);
 		createDialogLayout();
 		setSizeFull();
 	}
 
 	public Component renderComponent() {
-		grid = new Grid<>(SamplePerson.class, false);
+		grid = new Grid<>(SamplePersonDTO.class, false);
 		grid.setHeightFull();
 		grid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
 		grid.setAllRowsVisible(false);
@@ -111,8 +111,8 @@ public class UsersView extends ViewLayout {
 		TextField firstNameField = new TextField("First Name");
 		TextField lastNameField = new TextField("Last Name");
 
-		binder.forField(firstNameField).asRequired().bind(SamplePerson::getFirstName, SamplePerson::setFirstName);
-		binder.forField(lastNameField).asRequired().bind(SamplePerson::getLastName, SamplePerson::setLastName);
+		binder.forField(firstNameField).asRequired().bind(SamplePersonDTO::getFirstName, SamplePersonDTO::setFirstName);
+		binder.forField(lastNameField).asRequired().bind(SamplePersonDTO::getLastName, SamplePersonDTO::setLastName);
 
 		VerticalLayout dialogLayout = new VerticalLayout(firstNameField, lastNameField);
 		dialogLayout.setPadding(false);

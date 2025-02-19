@@ -8,10 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.example.application.data.SamplePerson;
-import com.example.application.data.SamplePersonRepository;
-import com.example.application.data.SampleProduct;
-import com.example.application.data.SampleProductRepository;
+import com.example.application.data.entity.SamplePerson;
+import com.example.application.data.entity.SampleProduct;
+import com.example.application.repository.SamplePersonRepository;
+import com.example.application.repository.SampleProductRepository;
 import com.github.javafaker.Faker;
 
 @Component
