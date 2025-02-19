@@ -14,6 +14,7 @@ import com.vaadin.flow.component.dependency.Uses;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
+import com.vaadin.flow.component.grid.Grid.SelectionMode;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.NativeLabel;
 import com.vaadin.flow.component.icon.Icon;
@@ -100,6 +101,7 @@ public class UsersView extends ViewLayout {
 			return detailsLayout;
 		}));
 		grid.setDetailsVisibleOnClick(false);
+		grid.setSelectionMode(SelectionMode.MULTI);
 		return grid;
 	}
 

@@ -14,6 +14,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.Uses;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.Grid.SelectionMode;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.NativeLabel;
@@ -88,7 +89,7 @@ public class ProductsView extends ViewLayout {
 		}));
 		grid.setDetailsVisibleOnClick(false);
 		grid.setItems(query -> sampleProductService.list(VaadinSpringDataHelpers.toSpringPageRequest(query)).stream());
-		
+		grid.setSelectionMode(SelectionMode.MULTI);
 		return grid;
 	}
 	
